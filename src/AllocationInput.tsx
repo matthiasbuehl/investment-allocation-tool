@@ -1,14 +1,18 @@
 import {
   Allocation,
+  AllocationDistribution,
   InvestorAmount,
   calculateAllocationDistribution,
 } from "./allocation";
 
-export default function AllocationInput() {
+export default function AllocationInput({
+  setDistribution,
+}: {
+  setDistribution: React.Dispatch<React.SetStateAction<AllocationDistribution>>;
+}) {
   function handleForm(e: React.SyntheticEvent) {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
-    console.log(formData.get("allocation_amount"));
 
     const investor_amounts: InvestorAmount[] = [];
     for (let i = 1; i <= 3; i++) {
@@ -22,10 +26,10 @@ export default function AllocationInput() {
       allocation_amount: Number(formData.get("allocation_amount")) ?? 0,
       investor_amounts: investor_amounts,
     };
-    console.log(allocation);
 
     const distributions = calculateAllocationDistribution(allocation);
-    console.log("distributions", distributions);
+
+    setDistribution(distributions);
   }
 
   function extractInvestorAmount(
