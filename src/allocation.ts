@@ -5,7 +5,7 @@ export interface Allocation {
   investor_amounts: InvestorAmount[];
 }
 
-interface InvestorAmount {
+export interface InvestorAmount {
   name: string;
   requested_amount: number;
   average_amount: number;
@@ -33,10 +33,16 @@ Investor B will invest $100 * (25 / (100 + 25)) = $20
 
   // sort investors by requested_amount asc
   allocation.investor_amounts.sort(
-    (a, b) => a.requested_amount - b.requested_amount
+    (a, b) =>
+      // first sort order
+      a.requested_amount - b.requested_amount ||
+      // secondary sort order
+      b.average_amount - a.average_amount
   );
 
   console.log("allocation:", allocation);
+
+  const distribution: AllocationDistribution = {};
 
   // sum up the average investment amounts of all investors
   let average_amount_sum = allocation.investor_amounts.reduce(
@@ -53,8 +59,18 @@ Investor B will invest $100 * (25 / (100 + 25)) = $20
       average_amount_sum
     );
 
-    console.log("max_amount", max_amount);
+    if (max_amount > investor_amount.requested_amount) {
+      average_amount_sum -= investor_amount.average_amount;
+      allocation.allocation_amount -= investor_amount.requested_amount;
+      distribution[investor_amount.name] = investor_amount.requested_amount;
+    } else {
+      distribution[investor_amount.name] = max_amount;
+    }
   }
+
+  console.log("distribution", distribution);
+
+  return distribution;
 }
 
 function getMaxInvestorAmount(
@@ -63,8 +79,6 @@ function getMaxInvestorAmount(
   average_amount_sum: number
 ): number {
   return (
-    1.0 *
-    allocation_amount *
-    (investor_amount.average_amount / average_amount_sum)
+    allocation_amount * (investor_amount.average_amount / average_amount_sum)
   );
 }
