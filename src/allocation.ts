@@ -19,20 +19,23 @@ export function calculateAllocationDistribution(
   allocation: Allocation
 ): AllocationDistribution {
   /*
-Available allocation: $100
-Investor A requested to invest $150
-Investor B requested to invest $50
+    EXAMPLE
+    Available allocation: $100
+    Investor A requested to invest $150
+    Investor B requested to invest $50
 
-Investor A has a historical average investment size of $100
-Investor B has a historical average investment size of $25
+    Investor A has a historical average investment size of $100
+    Investor B has a historical average investment size of $25
 
-After proration:
-Investor A will invest $100 * (100 / (100 + 25)) = $80
-Investor B will invest $100 * (25 / (100 + 25)) = $20
-*/
+    After proration:
+    Investor A will invest $100 * (100 / (100 + 25)) = $80
+    Investor B will invest $100 * (25 / (100 + 25)) = $20
+  */
 
-  // sort investors by requested_amount and average_amount in order to process
-  // the investors who are investing less than there max allowed amount.
+  /*
+    Sort investors by requested_amount and average_amount in order to process
+    the investors who are investing less than their max allowed amount first.
+  */
   allocation.investor_amounts.sort(
     (a, b) =>
       // first sort order
