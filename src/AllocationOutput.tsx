@@ -1,4 +1,3 @@
-import { ReactElement } from "react";
 import { AllocationDistribution } from "./allocation";
 
 export default function AllocationOutput({
@@ -6,15 +5,24 @@ export default function AllocationOutput({
 }: {
   distribution: AllocationDistribution;
 }) {
-  const rows: ReactElement[] = [];
+  // sort by amount descending
+  const sortedDistributions: { name: string; amount: number }[] = [];
   for (const [key, value] of Object.entries(distribution)) {
-    rows.push(<div>{`${key} - ${value}`}</div>);
+    sortedDistributions.push({ name: key, amount: value });
   }
+
+  sortedDistributions.sort((a, b) => b.amount - a.amount);
 
   return (
     <div className="output-container">
       <h2>Results</h2>
-      <div className="output-inner-container">{rows}</div>
+      <div className="output-inner-container">
+        {sortedDistributions.map((sd) => (
+          <div>
+            {sd.name} - {sd.amount}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

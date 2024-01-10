@@ -31,7 +31,8 @@ Investor A will invest $100 * (100 / (100 + 25)) = $80
 Investor B will invest $100 * (25 / (100 + 25)) = $20
 */
 
-  // sort investors by requested_amount asc
+  // sort investors by requested_amount and average_amount in order to process
+  // the investors who are investing less than there max allowed amount.
   allocation.investor_amounts.sort(
     (a, b) =>
       // first sort order
@@ -40,8 +41,6 @@ Investor B will invest $100 * (25 / (100 + 25)) = $20
       b.average_amount - a.average_amount
   );
 
-  console.log("allocation:", allocation);
-
   const distribution: AllocationDistribution = {};
 
   // sum up the average investment amounts of all investors
@@ -49,8 +48,6 @@ Investor B will invest $100 * (25 / (100 + 25)) = $20
     (acc, curr) => acc + curr.average_amount,
     0
   );
-
-  console.log("averageAmountSum", average_amount_sum);
 
   for (const investor_amount of allocation.investor_amounts) {
     const max_amount = getMaxInvestorAmount(
@@ -67,8 +64,6 @@ Investor B will invest $100 * (25 / (100 + 25)) = $20
       distribution[investor_amount.name] = max_amount;
     }
   }
-
-  console.log("distribution", distribution);
 
   return distribution;
 }
