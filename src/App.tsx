@@ -7,12 +7,11 @@ import "./App.css";
 function App() {
   const [distribution, setDistribution] =
     React.useState<AllocationDistribution>({});
-  console.log(distribution);
 
   return (
     <div className="container">
       <AllocationInput setDistribution={setDistribution} />
-      <AllocationOutput />
+      <AllocationOutput distribution={distribution} />
     </div>
   );
 }

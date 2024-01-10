@@ -1,6 +1,5 @@
-import { assert, describe, expect, it } from "vitest";
+import { describe, expect, it } from "vitest";
 import {
-  Allocation,
   AllocationDistribution,
   calculateAllocationDistribution,
 } from "../src/allocation.ts";

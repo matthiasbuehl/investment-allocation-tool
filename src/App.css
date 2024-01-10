@@ -1,4 +1,10 @@
-form {
+h2 {
+  margin: 10px 0;
+  display: block;
+}
+
+h3 {
+  margin-bottom: 5px;
 }
 
 section {
@@ -6,7 +12,8 @@ section {
 }
 
 .container {
-  margin: 0 autor;
+  margin: 0 auto;
+  padding: 20px;
   min-width: 800px;
   max-width: 1200px;;
   display: flex;
@@ -15,13 +22,26 @@ section {
 }
 
 .input-container {
+  padding: 20px;
   flex-grow: 3;
-  background-color: aquamarine;
+}
+
+.input-inner-container {
+  border: 1px solid black;
+  background-color: antiquewhite;
+  padding: 20px;
+  height: 80%;
 }
 
 .output-container {
+  padding: 20px;
   flex-grow: 1;
-  background-color: fuchsia;
+}
+
+.output-inner-container {
+    border: 1px solid black;
+    padding: 20px;
+    height: 80%;
 }
 
 .row {

@@ -57,19 +57,21 @@ export default function AllocationInput({
   return (
     <div className="input-container">
       <h2>Inputs</h2>
-      <form onSubmit={handleForm}>
-        <section>
-          <h3>Total Available Allocation</h3>
-          <input name="allocation_amount" placeholder="$ Allocation" />
-        </section>
-        <section>
-          <h3>Investor Breakdown</h3>
-          <AllocationInputRow postfix="1" />
-          <AllocationInputRow postfix="2" />
-          <AllocationInputRow postfix="3" />
-        </section>
-        <button>Prorate</button>
-      </form>
+      <div className="input-inner-container">
+        <form onSubmit={handleForm}>
+          <section>
+            <h3>Total Available Allocation</h3>
+            <input name="allocation_amount" placeholder="$ Allocation" />
+          </section>
+          <section>
+            <h3>Investor Breakdown</h3>
+            <AllocationInputRow postfix="1" />
+            <AllocationInputRow postfix="2" />
+            <AllocationInputRow postfix="3" />
+          </section>
+          <button>Prorate</button>
+        </form>
+      </div>
     </div>
   );
 }
