@@ -19,7 +19,7 @@ export default function AllocationOutput({
       <div className="output-inner-container">
         {sortedDistributions.map((sd) => (
           <div>
-            {sd.name} - {sd.amount}
+            {sd.name} - ${sd.amount}
           </div>
         ))}
       </div>
